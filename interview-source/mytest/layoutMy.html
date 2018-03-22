@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html * {
+				margin: 0;
+				padding: 0;
+			}
+			.container {
+				margin-top: 20px;
+			}
+			.container div {
+				min-height: 100px;
+			}
+			.left {
+				background-color: blue;
+			}
+			.mid {
+				background-color: yellow;
+			}
+			.right {
+				background-color: red;
+			}
+			.float .left {
+				float: left;
+				width: 300px;
+			}
+			.float .right {
+				float: right;
+				width: 300px;
+			}
+			
+			.absolute {
+				position: relative;
+			}
+			
+			.absolute div {
+				position: absolute;
+			}
+			.absolute .left {
+				left: 0;
+				width: 300px;
+			}
+			.absolute .right {
+				right: 0;
+				width: 300px;
+			}
+			.absolute .mid {
+				left: 300px;
+				right: 300px;
+			}
+			
+			.flex {
+				display: flex;
+			}
+			.flex .left {
+				width: 300px;
+			}
+			.flex .right {
+				width: 300px;
+			}
+			.flex .mid {
+				flex: 1;
+			}
+			.table {
+				height: 100px;
+				width:100%;
+				display: table;
+			}
+			.table div {
+				display: table-cell;
+			}
+			.table .left {
+				width: 300px;
+			}
+			.table .right {
+				width: 300px;
+			}
+			
+			.grid {
+				display: grid;
+				grid-template-rows: 100px;
+				grid-template-columns: 300px auto 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container float">
+			<div class="right"></div>
+			<div class="left"></div>
+			<div class="mid"></div>
+		</div>
+		
+		<div class="container flex">
+			<div class="right"></div>
+			<div class="mid"></div>
+			<div class="left"></div>
+		</div>
+		
+		<div class="container table">
+			<div class="left"></div>
+			<div class="mid"></div>
+			<div class="right"></div>
+		</div>
+		
+		<div class="container grid">
+			<div class="left">grid</div>
+			<div class="mid">grid</div>
+			<div class="right"></div>
+		</div>
+		
+		<div class="container absolute">
+			<div class="right"></div>
+			<div class="mid"></div>
+			<div class="left"></div>
+		</div>
+		
+		
+	</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			// 快速排序
+			var quicklySort = function(arr) {
+				if(arr.length <= 0) {
+					return arr;
+				}
+				var index = 0;
+				var indexValue = arr[0];
+				var left = [];
+				var right = [];
+				for(var i = 1; i < arr.length; i++) {
+					if(arr[i] <= indexValue) {
+						left.push(arr[i]);
+					} else {
+						right.push(arr[i]);
+					}
+				}
+				return quicklySort(left).concat([indexValue], quicklySort(right));
+			}
+			// 选择排序
+			var selectionSort = function(arr) {
+				for(var i = 0; i < arr.length - 1; i++) {
+					var minIdx = i;
+					for(var j = i + 1; j < arr.length; j++) {
+						if(arr[j] < arr[minIdx]) {
+							minIdx = j;
+						}
+					}
+					var temp = arr[i];
+					arr[i] = arr[minIdx];
+					arr[minIdx] = temp;
+				}
+				return arr;
+			}
+			// 冒泡排序
+			var bubbleSort = function(arr) {
+				for(var i = 0; i < arr.length; i++) {
+					for(var j = 0; j < arr.length - i - 1; j++) {
+						if(arr[j] > arr[j + 1]) {
+							var temp = arr[j];
+							arr[j] = arr[j + 1];
+							arr[j + 1] = temp;
+						}
+					}
+				}
+				return arr;
+			}
+			// 插入排序
+			var insertionSort = function(arr) {
+				for(var i = 1; i < arr.length; i++) {
+					var m = i;
+					var temp = arr[m];
+					while(arr[m - 1] > temp && m > 0) {
+						arr[m] = arr[m - 1]; // 相当于每个比temp大的数都右移一个位置
+						m--;
+					}
+					arr[m] = temp;
+				}
+				return arr;
+			}
+
+			function shellSort(arr) {
+				var len = arr.length,
+					temp,
+					gap = 1;
+				while(gap < len / 3) { //动态定义间隔序列
+					gap = gap * 3 + 1;
+				}
+				console.log(gap)
+				for(gap; gap > 0; gap = Math.floor(gap / 3)) {
+					console.log('gap', gap)
+					for(var i = gap; i < len; i++) {
+						temp = arr[i];
+						console.log('temp', temp)
+						for(var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+							console.log(i, j, arr[j + gap], arr[j]);
+							arr[j + gap] = arr[j];
+						}
+						console.log('j', j)
+						arr[j + gap] = temp;
+					}
+					console.log('split', arr)
+				}
+				return arr;
+			}
+			
+			var myShell = function(arr) {
+				var gap = 4;
+				for (gap; gap > 0; gap = Math.floor(gap / 3)) {
+					for (var i = gap; i < arr.length; i++) {
+						var temp = arr[i];
+						for (var j = i - gap; j > 0 && arr[j] > temp; j = j - gap) {
+							arr[j + gap] = arr[j];
+						}
+						arr[j + gap] = temp
+					}
+				}
+				return arr;
+			}
+			var arr = [7, 9, 3, 1, 88, 44, 66, 51, 57, 5, 3];
+//			console.log(quicklySort(arr));
+//			console.log(selectionSort(arr));
+//			console.log(bubbleSort(arr));
+//			console.log(insertionSort(arr));
+//			console.log(shellSort(arr));
+			console.log(myShell(arr));
+		</script>
+	</body>
+
+</html>

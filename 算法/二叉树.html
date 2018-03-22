@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var binaryTree = function() {
+				this.root = null;
+				this.insert = function(key) {
+					var newNode = new node(key);
+					if (this.root) {
+						insertNode(this.root, newNode);
+					} else {
+						this.root = newNode;
+					}
+				}
+				this.qianxu = function(calllback) {
+					if (this.root) {
+						qianxu(this.root, calllback);
+					}
+				}
+				this.zhongxu = function(callback) {
+					if (this.root) {
+						zhongxu(this.root, callback);
+					}
+				}
+				this.houxu = function(callback) {
+					if (this.root) {
+						houxu(this.root, callback);
+					}
+				}
+				this.cengji = function(callback) {
+					if (this.root) {
+						cengji(this.root, callback);
+					}
+				}
+				this.findMaxDeep = function() {
+					return findMaxDeep(this.root);
+				}
+				this.findKey = function(key) {
+					if (this.root) {
+						return findKey(this.root, key);
+					}
+					return false;
+				}
+				this.findMaxWidth = function() {
+					return findMaxWidth(this.root);
+				}
+				var node = function(key) {
+					this.key = key;
+					this.left = null;
+					this.right = null;
+				}
+				var findMaxDeep = function(root) {
+					if (root) {
+						var leftDeep = findMaxDeep(root.left);
+						var rightDeep = findMaxDeep(root.right);
+						return leftDeep > rightDeep ? leftDeep + 1 : rightDeep + 1;
+					} else {
+						return 0;
+					}
+				}
+				var findMaxWidth = function(root) {
+					var maxWdith = 0;
+					if (root) {
+						maxWdith = 1;
+					}
+					var arr = [];
+					arr[0] = [];
+					arr[0].push(root);
+					var flag = 0;
+					while (arr[flag].length > 0) {
+						var temp = arr[flag].shift();
+						if (!arr[flag + 1]) {
+							arr[flag + 1] = [];
+						}
+						if (temp.left) {
+							arr[flag + 1].push(temp.left);
+						}
+						if (temp.right) {
+							arr[flag + 1].push(temp.right);
+						}
+						if (arr[flag].length === 0) {
+							maxWdith = maxWdith < arr[flag + 1].length ? arr[flag + 1].length : maxWdith;
+							if (arr[flag + 1].length > 0) {
+								flag = flag + 1;
+							}
+						}
+					}
+					return maxWdith;
+				}
+				var findKey = function(root, key) {
+					if (root.key === key) {
+						return true;
+					} else if (key < root.key) {
+						if (root.left) {
+							return findKey(root.left, key);
+						} else {
+							return false;
+						}
+					} else {
+						if (root.right) {
+							return findKey(root.right, key);
+						} else {
+							return false;
+						}
+					}
+				}
+				var qianxu = function(root, callback) {
+					callback(root.key);
+					if (root.left) {
+						qianxu(root.left, callback);
+					}
+					if (root.right) {
+						qianxu(root.right, callback);
+					}
+				}
+				var zhongxu = function(root, callback) {
+					if (root.left) {
+						zhongxu(root.left, callback);
+					}
+					callback(root.key);
+					if (root.right) {
+						zhongxu(root.right, callback);
+					}
+				}
+				var houxu = function(root, callback) {
+					if (root.left) {
+						houxu(root.left, callback);
+					}
+					if (root.right) {
+						houxu(root.right, callback);
+					}
+					callback(root.key);
+				}
+				var cengji = function(root, callback) {
+					var arr = [];
+					arr.push(root);
+					while (arr.length > 0) {
+						var temp = arr.shift();
+						callback(temp.key);
+						if (temp.left) {
+							arr.push(temp.left);
+						}
+						if (temp.right) {
+							arr.push(temp.right);
+						}
+					}
+				}
+				var insertNode = function(oldNode, newNode) {
+					if (newNode.key <= oldNode.key) {
+						if (oldNode.left) {
+							insertNode(oldNode.left, newNode);
+						} else {
+							oldNode.left = newNode;
+						}
+					} else {
+						if (oldNode.right) {
+							insertNode(oldNode.right, newNode);
+						} else {
+							oldNode.right = newNode;
+						}
+					}
+				}
+			}
+			var newb = new binaryTree();
+			var arr = [15,7,19,17,5,3,18,8];
+			arr.forEach(function(i) {
+				newb.insert(i);
+			})
+			console.log(newb.root)
+			newb.qianxu(function(key) {
+				console.log(key)
+			});
+			console.log('-----------------');
+			newb.zhongxu(function(key) {
+				console.log(key)
+			});
+			console.log('-----------------');
+			newb.houxu(function(key) {
+				console.log(key)
+			});
+			console.log('-----------------');
+			newb.cengji(function(key) {
+				console.log(key);
+			});
+			console.log('------------');
+			console.log(newb.findMaxDeep());
+			for (var i = 0; i <= 20; i++) {
+				console.log(i, newb.findKey(i));
+			}
+			console.log('findMaxWidth', newb.findMaxWidth());
+		</script>
+	</body>
+</html>

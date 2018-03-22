@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			for (var i = 0; i < 10; i ++) {
+				(function(i) {
+					console.log(i)
+					let a = document.createElement('a');
+					a.innerHTML = i + '<br/>';
+					a.addEventListener('click', function(e) {
+						e.preventDefault();
+						alert(i);
+					});
+					document.body.appendChild(a)
+				})(i);
+			}
+			for (let i = 0; i < 10; i ++) {
+				let a = document.createElement('a');
+				a.innerHTML = i + '<br/>';
+				a.addEventListener('click', function(e) {
+					e.preventDefault();
+					alert(i);
+				});
+				document.body.appendChild(a)
+			}
+			
+			// 闭包应用
+			function FirstLoad() {
+				var _list = [];
+				return function(id) {
+					if (_list.indexOf(id) < 0) {
+						_list.push(id);
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+			var isFirstLoad = FirstLoad();
+			console.log(isFirstLoad(1));
+			console.log(isFirstLoad(1));
+			console.log(isFirstLoad(2));
+			console.log(isFirstLoad(2));
+			var isFirstLoad2 = FirstLoad();
+			console.log(isFirstLoad2(1));
+			console.log(isFirstLoad2(1));
+			console.log(isFirstLoad2(2));
+			console.log(isFirstLoad2(2));
+			
+			function test() {
+				var a = 1;
+				return function() {
+					console.log(a)
+					return a;
+				}
+			}
+			var a = 200;
+			var testM = test();
+			testM();
+			let m;
+			for (m = 0; m < 10; m++) {
+				setTimeout(() => {
+					console.log(m)
+				}, 20)
+			}
+		</script>
+	</body>
+</html>

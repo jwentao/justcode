@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box {
+				margin: 20px;
+				padding: 20px;
+				border: 1px red solid;
+				width: 50px;
+				height: 50px;
+				background-color: #0000FF;
+			}
+			.border-box {
+				box-sizing: border-box;
+			}
+			.content-box {
+				box-sizing: content-box;
+			}
+			.container {
+				overflow: hidden;
+			}
+			
+			.float-container {
+				border: 5px solid black;
+				overflow: hidden;
+			}
+			
+			.float-box {
+				float: left;
+				width: 50px;
+				height: 50px;
+				background-color: #eeeeee;
+			}
+		</style>
+	</head>
+	<body>
+		<!--创建BFC方法： float，position不是static和relative，display为table相关的, overflow 不为visible
+			BFC不与浮动元素重叠
+			BFC作用 清除浮动：BFC子元素即使是float也会参与高度计算-->
+
+		<!--<div class="box border-box"></div>
+		<div class="box content-box"></div>-->
+		<!--<div class="box"></div>
+		<div class="box"></div>
+		<div class="container"><div class="box"></div></div>
+		<div class="container"><div class="box"></div></div>-->
+		
+		<div class="float-container">
+			<div class="float-box">
+				
+			</div>
+		</div>
+	</body>
+</html>

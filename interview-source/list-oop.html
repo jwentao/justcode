@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>阿里2017</title>
+  </head>
+  <body>
+    <style media="screen">
+      .del{
+        cursor: pointer;
+      }
+    </style>
+    <ul class="list">
+      <li>
+        <h1>第一行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+      <li>
+        <h1>第二行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+      <li>
+        <h1>第三行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+      <li>
+        <h1>第四行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+    </ul>
+    <ul class="list">
+      <li>
+        <h1>这是另一个List第一行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+      <li>
+        <h1>这是另一个List第二行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+      <li>
+        <h1>这是另一个List第三行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+      <li>
+        <h1>这是另一个List第四行</h1>
+        <p>这是内容区，点击X删除当前行，<span class="del">X</span></p>
+      </li>
+    </ul>
+    <script type="text/javascript">
+      class List {
+          constructor (sel) {
+          		console.log(document.querySelectorAll(sel))
+              this.el = Array.from(document.querySelectorAll(sel));
+              let self = this;
+              this.el.forEach(item => {
+                  item.addEventListener('click',(e) => {
+                  	console.log(e.target.classList)
+                      if (e.target.classList.contains('del')) {
+                          self.removeItem.call(self, e.target);
+                      }
+                  });
+              });
+          }
+          removeItem (target) {
+              let self = this;
+              let findParent = function (node) {
+                  let parent = node.parentNode;
+                  self.el.find(item => {
+                  	console.log(item, parent)
+                  })
+                  let root = self.el.find(item=>item === parent);
+                  if (root) {
+//                    root.removeChild(node);
+											node.remove();
+                  } else {
+                      findParent(parent);
+                  }
+              };
+              findParent(target);
+          }
+      }
+			class myList{
+				constructor (sel) {
+					console.log(Array.from(document.querySelectorAll(sel)) instanceof Array)
+					this.el = Array.from(document.getElementsByClassName(sel));
+					this.el.forEach(item => {
+						item.addEventListener('click', e => {
+							console.log(e.target.classList)
+							if (e.target.classList.contains('del')) {
+								this.removeItem(e.target);
+							}
+						},false)
+					})
+				}
+				removeItem (target) {
+					let self = this;
+					let findParent = function(node) {
+						let parent = node.parentNode;
+						let root = self.el.find(item => item === parent);
+						if (root) {
+							node.remove();
+						} else {
+							findParent(parent);
+						}
+					}
+					findParent(target);
+				}
+			}
+      window.addEventListener('DOMContentLoaded', function () {
+          new myList('.list');
+      });
+    </script>
+  </body>
+</html>
